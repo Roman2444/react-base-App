@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.App {
+    width: 600px;
+    margin: 0 auto;
+}
+
+.post {
+    display: flex;
+    margin-top: 15px;
+  
+    padding: 15px;
+    border: 1px solid gray;
+}
+
+.post__content {
+    display: flex;
+
+    flex-direction: row; 
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.post__text {
+    width: 500px;
+}
+
+ 
