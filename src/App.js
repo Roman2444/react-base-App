@@ -1,11 +1,6 @@
 import React from "react";
-import Counter from "./components/Counter";
-import ClassCounter from "./components/ClassCounter";
-import Input from "./components/Input";
 import PostList from "./components/PostList";
-import PostItem from "./components/PostItem";
-import MyButton from "./components/UI/button/MyButton";
-import MyInput from "./components/UI/input/MyInput";
+import PostForm from "./components/PostForm";
 import "./styles/App.css";
 
 function App() {
@@ -26,37 +21,14 @@ function App() {
       body: "lorem gwegwe  gw4gwer w w wegweg wegewgweg wegwegwd gfewgsege",
     },
   ]);
-  const [post, setPost] = React.useState({ title: "", body: "" });
-  // const [title, setTitle] = React.useState("ffff");
-  // const [body, setBody] = React.useState("text");
-  const createPost = (e) => {
-    e.preventDefault();
-    const newPost = {
-      id: Date.now(),
-      title: post.title,
-      body: post.body,
-    };
+
+  const addNewPost = (newPost) => {
     setPosts((prev) => [...prev, newPost]);
-    setPost({ title: "", body: "" });
   };
 
   return (
     <div className="App">
-      <form action="">
-        <MyInput
-          value={post.title}
-          type="text"
-          placeholder="название поста"
-          onChange={(e) => setPost({ ...post, title: e.target.value })}
-        />
-        <MyInput
-          value={post.body}
-          type="text"
-          placeholder="описание поста"
-          onChange={(e) => setPost({ ...post, body: e.target.value })}
-        />
-        <MyButton onClick={createPost}>создать пост</MyButton>
-      </form>
+      <PostForm create={addNewPost} />
       <PostList posts={posts} title="Список постов JS" />
     </div>
   );
