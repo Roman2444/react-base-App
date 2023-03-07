@@ -4,6 +4,7 @@ import ClassCounter from "./components/ClassCounter";
 import Input from "./components/Input";
 import PostList from "./components/PostList";
 import PostItem from "./components/PostItem";
+import MyButton from "./components/UI/button/MyButton";
 import "./styles/App.css";
 
 function App() {
@@ -24,29 +25,15 @@ function App() {
       body: "lorem gwegwe  gw4gwer w w wegweg wegewgweg wegwegwd gfewgsege",
     },
   ]);
-  const [posts2, setPost2] = React.useState([
-    {
-      id: 1,
-      title: "Python",
-      body: "lorem gwegwe  gw4gwer w w wegweg wegewgweg wegwegwd gfewgsege",
-    },
-    {
-      id: 2,
-      title: "Python2",
-      body: "lorem gwegwe  gw4gwer w w wegweg wegewgweg wegwegwd gfewgsege",
-    },
-    {
-      id: 3,
-      title: "Python3",
-      body: "lorem gwegwe  gw4gwer w w wegweg wegewgweg wegwegwd gfewgsege",
-    },
-  ]);
 
   return (
     <div className="App">
+      <form action="">
+        <input type="text" placeholder="название поста" />
+        <input type="text" placeholder="описание поста" />
+        <MyButton>создать пост</MyButton>
+      </form>
       <PostList posts={posts} title="Список постов JS" />
-      <PostList posts={posts2} title="Список постов Python" />
-
     </div>
   );
 }
