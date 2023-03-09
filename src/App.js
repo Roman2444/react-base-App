@@ -26,10 +26,21 @@ function App() {
     setPosts((prev) => [...prev, newPost]);
   };
 
+  const deletePost = (id) => {
+    setPosts(posts.filter((post) => post.id !== id));
+
+    console.log(posts.filter((post) => post.id === id));
+  };
+  // deletePost(1);
+
   return (
     <div className="App">
       <PostForm create={addNewPost} />
-      <PostList posts={posts} title="Список постов JS" />
+      <PostList
+        posts={posts}
+        title="Список постов JS"
+        deletePost={deletePost}
+      />
     </div>
   );
 }
