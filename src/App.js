@@ -1,6 +1,7 @@
 import React from "react";
 import PostList from "./components/PostList";
 import PostForm from "./components/PostForm";
+import MySelect from "./components/UI/select/MySelect";
 import "./styles/App.css";
 
 function App() {
@@ -22,6 +23,13 @@ function App() {
     },
   ]);
 
+  const [selectedSort, setSelectedSort] = React.useState("");
+
+  const sortPosts = (sort) => {
+    setSelectedSort(sort);
+    setPosts([...posts].sort((a, b) => a[sort].localeCompare(b[sort])));
+  };
+
   const addNewPost = (newPost) => {
     setPosts((prev) => [...prev, newPost]);
   };
@@ -33,6 +41,18 @@ function App() {
   return (
     <div className="App">
       <PostForm create={addNewPost} />
+      <hr style={{ margin: "15px 0" }} />
+      <div>
+        <MySelect
+          value={selectedSort}
+          onChange={sortPosts}
+          defaultValue="сортировка"
+          options={[
+            { name: "по названию", value: "title" },
+            { name: "по описанию", value: "body" },
+          ]}
+        />
+      </div>
       {posts.length !== 0 ? (
         <PostList
           posts={posts}
@@ -40,7 +60,7 @@ function App() {
           deletePost={deletePost}
         />
       ) : (
-        <h3>Посты не найдены</h3>
+        <h3 style={{ textAlign: "center" }}>Посты не найдены</h3>
       )}
     </div>
   );
