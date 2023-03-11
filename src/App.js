@@ -28,19 +28,20 @@ function App() {
 
   const deletePost = (id) => {
     setPosts(posts.filter((post) => post.id !== id));
-
-    console.log(posts.filter((post) => post.id === id));
   };
-  // deletePost(1);
 
   return (
     <div className="App">
       <PostForm create={addNewPost} />
-      <PostList
-        posts={posts}
-        title="Список постов JS"
-        deletePost={deletePost}
-      />
+      {posts.length !== 0 ? (
+        <PostList
+          posts={posts}
+          title="Список постов JS"
+          deletePost={deletePost}
+        />
+      ) : (
+        <h3>Посты не найдены</h3>
+      )}
     </div>
   );
 }
