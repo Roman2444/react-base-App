@@ -2,8 +2,6 @@ import React from "react";
 import PostList from "./components/PostList";
 import PostForm from "./components/PostForm";
 import PostFilter from "./components/PostFilter";
-import MySelect from "./components/UI/select/MySelect";
-import MyInput from "./components/UI/input/MyInput";
 import "./styles/App.css";
 
 function App() {
@@ -25,10 +23,9 @@ function App() {
     },
   ]);
 
-  const [filter, setFilter] = React.useState({sort: '', query: ''});
+  const [filter, setFilter] = React.useState({ sort: "", query: "" });
 
   const sortedPosts = React.useMemo(() => {
-    console.log("getSortedPosts worked");
     if (filter.sort) {
       return [...posts].sort((a, b) =>
         a[filter.sort].localeCompare(b[filter.sort])
@@ -43,7 +40,6 @@ function App() {
     );
   }, [filter.query, sortedPosts]);
 
-
   const addNewPost = (newPost) => {
     setPosts((prev) => [...prev, newPost]);
   };
@@ -56,19 +52,12 @@ function App() {
     <div className="App">
       <PostForm create={addNewPost} />
       <hr style={{ margin: "15px 0" }} />
-      <PostFilter
-        filter={filter}
-        setFilter={setFilter}
+      <PostFilter filter={filter} setFilter={setFilter} />
+      <PostList
+        posts={sortedAndSearchedPosts}
+        title="Список постов JS"
+        deletePost={deletePost}
       />
-      {sortedAndSearchedPosts.length !== 0 ? (
-        <PostList
-          posts={sortedAndSearchedPosts}
-          title="Список постов JS"
-          deletePost={deletePost}
-        />
-      ) : (
-        <h3 style={{ textAlign: "center" }}>Посты не найдены</h3>
-      )}
     </div>
   );
 }
