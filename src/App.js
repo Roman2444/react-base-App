@@ -48,7 +48,9 @@ function App() {
   }, [selectedSort, posts]);
 
   const sortedAndSearchedPosts = React.useMemo(() => {
-    return sortedPosts.filter((post) => post.title.toLowerCase().includes(searchQuery.toLowerCase()));
+    return sortedPosts.filter((post) =>
+      post.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
   }, [searchQuery, sortedPosts]);
 
   const sortPosts = (sort) => {
@@ -83,7 +85,7 @@ function App() {
           ]}
         />
       </div>
-      {posts.length !== 0 ? (
+      {sortedAndSearchedPosts.length !== 0 ? (
         <PostList
           posts={sortedAndSearchedPosts}
           title="Список постов JS"
