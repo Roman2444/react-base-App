@@ -27,7 +27,17 @@ function App() {
   const [selectedSort, setSelectedSort] = React.useState("");
   const [searchQuery, setSearchQuery] = React.useState("");
 
-  function getSortedPosts() {
+  // function getSortedPosts() {
+  //   console.log("getSortedPosts worked");
+  //   if (selectedSort) {
+  //     return [...posts].sort((a, b) =>
+  //       a[selectedSort].localeCompare(b[selectedSort])
+  //     );
+  //   }
+  //   return posts;
+  // }
+
+  const sortedPosts = React.useMemo(() => {
     console.log("getSortedPosts worked");
     if (selectedSort) {
       return [...posts].sort((a, b) =>
@@ -35,9 +45,11 @@ function App() {
       );
     }
     return posts;
-  }
+  }, [selectedSort, posts]);
 
-  const sortedPosts = getSortedPosts();
+  const sortedAndSearchedPosts = React.useMemo(() => {
+    return sortedPosts.filter((post) => post.title.toLowerCase().includes(searchQuery.toLowerCase()));
+  }, [searchQuery, sortedPosts]);
 
   const sortPosts = (sort) => {
     setSelectedSort(sort);
@@ -73,7 +85,7 @@ function App() {
       </div>
       {posts.length !== 0 ? (
         <PostList
-          posts={sortedPosts}
+          posts={sortedAndSearchedPosts}
           title="Список постов JS"
           deletePost={deletePost}
         />
