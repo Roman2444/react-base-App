@@ -40,9 +40,20 @@ function App() {
     setPosts(posts.filter((post) => post.id !== id));
   };
 
+  const fetchPosts = () => {
+    fetch("https://jsonplaceholder.typicode.com/posts")
+      .then((response) => response.json())
+      .then((json) => setPosts(json));
+  };
+
   return (
     <div className="App">
-      <MyButton style={{marginTop: 30}} onClick={setModal}>добавить пост</MyButton>
+      <MyButton style={{ marginTop: 30 }} onClick={fetchPosts}>
+        загрузить посты
+      </MyButton>
+      <MyButton style={{ marginTop: 30 }} onClick={setModal}>
+        добавить пост
+      </MyButton>
       <MyModal visible={modal} setVisible={() => setModal(false)}>
         <PostForm create={addNewPost} />
       </MyModal>
