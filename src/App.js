@@ -13,6 +13,7 @@ function App() {
   const [modal, setModal] = React.useState(false);
   const [filter, setFilter] = React.useState({ sort: "", query: "" });
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   React.useEffect(() => {
     fetchPosts();
@@ -28,8 +29,10 @@ function App() {
   };
 
   async function fetchPosts() {
+    setIsLoading(true);
     const posts = await PostService.getAll();
     setPosts(posts);
+    setIsLoading(false);
   }
 
   return (
@@ -45,11 +48,15 @@ function App() {
       </MyModal>
       <hr style={{ margin: "15px 0" }} />
       <PostFilter filter={filter} setFilter={setFilter} />
-      <PostList
-        posts={sortedAndSearchedPosts}
-        title="Список постов JS"
-        deletePost={deletePost}
-      />
+      {isLoading ? (
+        <h2 style={{ textAlign: "center" }}> идёт загрузка...</h2>
+      ) : (
+        <PostList
+          posts={sortedAndSearchedPosts}
+          title="Список постов JS"
+          deletePost={deletePost}
+        />
+      )}
     </div>
   );
 }
