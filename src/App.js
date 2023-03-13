@@ -4,6 +4,7 @@ import PostForm from "./components/PostForm";
 import PostFilter from "./components/PostFilter";
 import MyButton from "./components/UI/button/MyButton";
 import MyModal from "./components/UI/MyModal/MyModal";
+import usePosts from "./components/hooks/usePosts";
 import "./styles/App.css";
 
 function App() {
@@ -26,23 +27,9 @@ function App() {
   ]);
 
   const [modal, setModal] = React.useState(false);
-
   const [filter, setFilter] = React.useState({ sort: "", query: "" });
 
-  const sortedPosts = React.useMemo(() => {
-    if (filter.sort) {
-      return [...posts].sort((a, b) =>
-        a[filter.sort].localeCompare(b[filter.sort])
-      );
-    }
-    return posts;
-  }, [filter.sort, posts]);
-
-  const sortedAndSearchedPosts = React.useMemo(() => {
-    return sortedPosts.filter((post) =>
-      post.title.toLowerCase().includes(filter.query.toLowerCase())
-    );
-  }, [filter.query, sortedPosts]);
+  const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
 
   const addNewPost = (newPost) => {
     setPosts((prev) => [...prev, newPost]);
