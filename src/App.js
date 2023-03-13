@@ -15,7 +15,6 @@ function App() {
   const [modal, setModal] = React.useState(false);
   const [filter, setFilter] = React.useState({ sort: "", query: "" });
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
-  // const [isLoading, setIsLoading] = React.useState(false);
 
   React.useEffect(() => {
     fetchPosts();
@@ -29,13 +28,6 @@ function App() {
   const deletePost = (id) => {
     setPosts(posts.filter((post) => post.id !== id));
   };
-
-  // async function fetchPosts() {
-  //   setIsLoading(true);
-  //   const posts = await PostService.getAll();
-  //   setPosts(posts);
-  //   setIsLoading(false);
-  // }
 
   const [fetchPosts, isLoading, postError] = useFetching(async () => {
     const posts = await PostService.getAll();
