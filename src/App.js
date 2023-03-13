@@ -5,16 +5,17 @@ import PostFilter from "./components/PostFilter";
 import MyButton from "./components/UI/button/MyButton";
 import MyModal from "./components/UI/MyModal/MyModal";
 import usePosts from "./components/hooks/usePosts";
-import "./styles/App.css";
 import PostService from "./API/PostService";
 import Loader from "./components/UI/Loader/Loader";
+import { useFetching } from "./components/hooks/useFetching";
+import "./styles/App.css";
 
 function App() {
   const [posts, setPosts] = React.useState([]);
   const [modal, setModal] = React.useState(false);
   const [filter, setFilter] = React.useState({ sort: "", query: "" });
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
-  const [isLoading, setIsLoading] = React.useState(false);
+  // const [isLoading, setIsLoading] = React.useState(false);
 
   React.useEffect(() => {
     fetchPosts();
@@ -29,12 +30,17 @@ function App() {
     setPosts(posts.filter((post) => post.id !== id));
   };
 
-  async function fetchPosts() {
-    setIsLoading(true);
+  // async function fetchPosts() {
+  //   setIsLoading(true);
+  //   const posts = await PostService.getAll();
+  //   setPosts(posts);
+  //   setIsLoading(false);
+  // }
+
+  const [fetchPosts, isLoading, postError] = useFetching(async () => {
     const posts = await PostService.getAll();
     setPosts(posts);
-    setIsLoading(false);
-  }
+  });
 
   return (
     <div className="App">
@@ -49,10 +55,9 @@ function App() {
       </MyModal>
       <hr style={{ margin: "15px 0" }} />
       <PostFilter filter={filter} setFilter={setFilter} />
+      {postError && <h2> произошла ошибка${postError}</h2>}
       {isLoading ? (
-        <Loader style={{margin: '0 auto'}}>
-           -----
-        </Loader>
+        <Loader style={{ margin: "0 auto" }}>---</Loader>
       ) : (
         <PostList
           posts={sortedAndSearchedPosts}
