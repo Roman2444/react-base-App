@@ -7,6 +7,7 @@ import MyModal from "./components/UI/MyModal/MyModal";
 import usePosts from "./components/hooks/usePosts";
 import "./styles/App.css";
 import PostService from "./API/PostService";
+import Loader from "./components/UI/Loader/Loader";
 
 function App() {
   const [posts, setPosts] = React.useState([]);
@@ -49,7 +50,9 @@ function App() {
       <hr style={{ margin: "15px 0" }} />
       <PostFilter filter={filter} setFilter={setFilter} />
       {isLoading ? (
-        <h2 style={{ textAlign: "center" }}> идёт загрузка...</h2>
+        <Loader style={{margin: '0 auto'}}>
+           -----
+        </Loader>
       ) : (
         <PostList
           posts={sortedAndSearchedPosts}
