@@ -32,6 +32,10 @@ function App() {
 
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
 
+  React.useEffect(() => {
+    fetchPosts() 
+  }, [])
+
   const addNewPost = (newPost) => {
     setPosts((prev) => [...prev, newPost]);
     setModal(false);
@@ -41,7 +45,7 @@ function App() {
     setPosts(posts.filter((post) => post.id !== id));
   };
 
-  const fetchPosts = async () => {
+  async function fetchPosts()  {
     const response = await axios.get(
       "https://jsonplaceholder.typicode.com/posts"
     );
