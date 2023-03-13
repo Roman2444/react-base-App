@@ -7,30 +7,11 @@ import MyModal from "./components/UI/MyModal/MyModal";
 import usePosts from "./components/hooks/usePosts";
 import "./styles/App.css";
 import PostService from "./API/PostService";
-import axios from "axios";
 
 function App() {
-  const [posts, setPosts] = React.useState([
-    {
-      id: 1,
-      title: "Java Script",
-      body: "lorem gwegwe  gw4gwer w w wegweg wegewgweg wegwegwd gfewgsege",
-    },
-    {
-      id: 2,
-      title: "Java Script2",
-      body: "lorem gwegwe  gw4gwer w w wegweg wegewgweg wegwegwd gfewgsege",
-    },
-    {
-      id: 3,
-      title: "Java Script3",
-      body: "lorem gwegwe  gw4gwer w w wegweg wegewgweg wegwegwd gfewgsege",
-    },
-  ]);
-
+  const [posts, setPosts] = React.useState([]);
   const [modal, setModal] = React.useState(false);
   const [filter, setFilter] = React.useState({ sort: "", query: "" });
-
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
 
   React.useEffect(() => {
