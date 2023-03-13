@@ -29,10 +29,12 @@
 }
 
 .post__text {
-    width: 480px;
+    width: 450px;
 }
 
-
+.post__btn {
+    margin-left: 30px;;
+}
 
 .post-enter {
     transform: translateX(-350px);
