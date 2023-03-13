@@ -6,6 +6,7 @@ import MyButton from "./components/UI/button/MyButton";
 import MyModal from "./components/UI/MyModal/MyModal";
 import usePosts from "./components/hooks/usePosts";
 import "./styles/App.css";
+import PostService from "./API/PostService";
 import axios from "axios";
 
 function App() {
@@ -33,8 +34,8 @@ function App() {
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
 
   React.useEffect(() => {
-    fetchPosts() 
-  }, [])
+    fetchPosts();
+  }, []);
 
   const addNewPost = (newPost) => {
     setPosts((prev) => [...prev, newPost]);
@@ -45,13 +46,10 @@ function App() {
     setPosts(posts.filter((post) => post.id !== id));
   };
 
-  async function fetchPosts()  {
-    const response = await axios.get(
-      "https://jsonplaceholder.typicode.com/posts"
-    );
-    setPosts(response.data);
-    console.log(response);
-  };
+  async function fetchPosts() {
+    const posts = await PostService.getAll();
+    setPosts(posts);
+  }
 
   return (
     <div className="App">
