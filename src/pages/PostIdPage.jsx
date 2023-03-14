@@ -7,19 +7,26 @@ import { useFetching } from "../hooks/useFetching";
 const PostIdPage = () => {
   const params = useParams();
   const [post, setPost] = React.useState({});
-  const [comments, setComments] = React.useState({});
+  const [comments, setComments] = React.useState([]);
 
-  const [fetchPostById, isLoading, postError] = useFetching(async () => {
-    const response = await PostService.getById(params.id);
+  const [fetchPostById, isLoading, postError] = useFetching(async (id) => {
+    const response = await PostService.getById(id);
     setPost(response.data);
   });
 
+  const [fetchPCommentsById, isCommentsLoading, commentsError] = useFetching(
+    async (id) => {
+      const response = await PostService.getCommentById(id);
+      setComments(response.data);
+    }
+  );
+
   React.useEffect(() => {
-    fetchPostById();
+    fetchPostById(params.id);
+    fetchPCommentsById(params.id);
   }, []);
-  console.log(post);
   return (
-    <div>
+    <div key={post.id}>
       <br />
       <h3>вы открыли страницу поста c ID = {params.id}</h3>
       <br />
@@ -30,14 +37,28 @@ const PostIdPage = () => {
         <div>
           <br />
           <strong>
-            {post.id}. {post.title}{" "}
-          </strong>{" "}
+            {post.id}. {post.title}
+          </strong>
           <br />
           <br />
           {post.body}
         </div>
       )}
+      <br />
       <h3>комментарии:</h3>
+      {isCommentsLoading ? (
+        <Loader />
+      ) : (
+        comments.map((el) => (
+          <div key={el.name} style={{ marginTop: 15 }}>
+            <strong>{el.name}</strong>
+            <br />
+            {el.email}
+            <br />
+            {el.body}
+          </div>
+        ))
+      )}
     </div>
   );
 };

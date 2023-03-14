@@ -23,7 +23,7 @@ export default class PostService {
 
   static async getCommentById(id) {
     const response = await axios.get(
-      `https://jsonplaceholder.typicode.com/posts/${id}/comment`
+      `https://jsonplaceholder.typicode.com/posts/${id}/comments`
     );
     return response;
   }
