@@ -1,8 +1,10 @@
 import React from 'react';
 import MyButton from "../components/UI/button/MyButton";
+import { useNavigate } from 'react-router-dom';
 
 const PostItem = (props) => {
-    
+    const navigate = useNavigate();
+    console.log(navigate);
     const onDeletePost = () => {
         props.deletePost(props.id)
     }
@@ -15,6 +17,7 @@ const PostItem = (props) => {
                     {props.post.body}
                 </div>
                 <div className="post__btn">
+                    <MyButton onClick={()=> navigate(`/posts/${props.post.id}`)}>открыть</MyButton>
                     <MyButton onClick={onDeletePost}>удалить</MyButton>
                 </div>
             </div>

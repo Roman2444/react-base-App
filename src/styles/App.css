@@ -7,13 +7,13 @@
 #root {
     display: flex;
     flex-direction: column;
-    width: 600px;
+    width: 700px;
     margin: 0 auto;
 
 }
 
 .App {
-    width: 600px;
+    width: 700px;
     margin: 0 auto;
 }
 
@@ -31,8 +31,7 @@
 
     flex-direction: row; 
     justify-content: space-between;
-    align-items: center;
-    
+    align-items: center; 
 }
 
 .post__text {
@@ -40,7 +39,8 @@
 }
 
 .post__btn {
-    margin-left: 30px;;
+    margin-left: 40px;
+    display: flex;
 }
 
 .post-enter {
