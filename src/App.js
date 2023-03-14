@@ -9,7 +9,7 @@ import PostService from "./API/PostService";
 import Loader from "./components/UI/Loader/Loader";
 import { useFetching } from "./hooks/useFetching";
 import { getPageCount } from "./utils/pages";
-import { usePagesArray } from "./utils/pages";
+import Pagination from "./components/UI/pagination/Pagination";
 
 import "./styles/App.css";
 
@@ -18,10 +18,10 @@ function App() {
   const [modal, setModal] = React.useState(false);
   const [filter, setFilter] = React.useState({ sort: "", query: "" });
   const [totalPages, setTotalPages] = React.useState(0);
-  const [limit, setLimit] = React.useState(6);
+  const [limit, setLimit] = React.useState(10);
   const [page, setPage] = React.useState(2);
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
-  const pagesArray = usePagesArray(totalPages);
+
 
   const [fetchPosts, isLoading, postError] = useFetching(async () => {
     const response = await PostService.getAll(limit, page);
@@ -66,17 +66,11 @@ function App() {
           deletePost={deletePost}
         />
       )}
-      <div className="page__wrapper">
-        {pagesArray.map((el) => (
-          <span
-            onClick={() => setPage(el)}
-            className={page === el ? "page page__current" : "page"}
-            key={el}
-          >
-            {el}
-          </span>
-        ))}
-      </div>
+      <Pagination
+        totalPages={totalPages}
+        page={page}
+        setPage={setPage}
+      />
     </div>
   );
 }
