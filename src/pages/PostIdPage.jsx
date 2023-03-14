@@ -7,6 +7,7 @@ import { useFetching } from "../hooks/useFetching";
 const PostIdPage = () => {
   const params = useParams();
   const [post, setPost] = React.useState({});
+  const [comments, setComments] = React.useState({});
 
   const [fetchPostById, isLoading, postError] = useFetching(async () => {
     const response = await PostService.getById(params.id);
