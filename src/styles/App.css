@@ -51,6 +51,26 @@
     transform: translateX(-350px);
     transition: all 500ms ease-in;
 }
-  
+
+.page__wrapper{
+    display: flex;
+    margin: 20px 0;
+}
+
+.page {
+    padding: 5px;
+    border: 1px solid teal;
+    border-radius: 5px; 
+    cursor: pointer;
+    color: teal
+}
+
+.page__current {
+    border: 3px solid rgb(28, 69, 69);
+    font-weight: bold;
+    color: rgb(48, 81, 81);
+    transform: translateY(-2px);
+
+}
 
  

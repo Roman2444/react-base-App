@@ -18,8 +18,8 @@ function App() {
   const [modal, setModal] = React.useState(false);
   const [filter, setFilter] = React.useState({ sort: "", query: "" });
   const [totalPages, setTotalPages] = React.useState(0);
-  const [limit, setLimit] = React.useState(10);
-  const [page, setPage] = React.useState(1);
+  const [limit, setLimit] = React.useState(6);
+  const [page, setPage] = React.useState(2);
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
   const pagesArray = usePagesArray(totalPages);
 
@@ -66,9 +66,17 @@ function App() {
           deletePost={deletePost}
         />
       )}
-      {pagesArray.map((el) => (
-        <button key={el}>{el}</button>
-      ))}
+      <div className="page__wrapper">
+        {pagesArray.map((el) => (
+          <span
+            onClick={() => setPage(el)}
+            className={page === el ? "page page__current" : "page"}
+            key={el}
+          >
+            {el}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }
