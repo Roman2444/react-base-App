@@ -1,13 +1,13 @@
-import React from 'react';
-import {Link } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
-    return (
-        <div className="navbar">
-            <Link to="/posts">Посты</Link>
-            <Link to="/about">О проекте</Link>
-      </div>
-    );
+  return (
+    <div className="navbar">
+      <Link to="/">Посты</Link>
+      <Link to="/about">О проекте</Link>
+    </div>
+  );
 };
 
 export default Navbar;
