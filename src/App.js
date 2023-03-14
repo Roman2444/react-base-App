@@ -32,7 +32,7 @@ function App() {
 
   React.useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [page]);
 
   const addNewPost = (newPost) => {
     setPosts((prev) => [...prev, newPost]);
