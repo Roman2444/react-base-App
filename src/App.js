@@ -7,6 +7,12 @@ import "./styles/App.css";
 
 function App() {
   const [isAuth, setIsAuth] = React.useState(false);
+  React.useEffect(() => {
+    if (localStorage.getItem("isAuth")) {
+      setIsAuth(true);
+    }
+  }, []);
+
   return (
     <AuthContext.Provider
       value={{
