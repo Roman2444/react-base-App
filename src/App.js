@@ -6,7 +6,7 @@ import { AuthContext } from "./context";
 import "./styles/App.css";
 
 function App() {
-  const [isAuth, setIsAuth] = React.useState(true);
+  const [isAuth, setIsAuth] = React.useState(false);
   return (
     <AuthContext.Provider
       value={{
