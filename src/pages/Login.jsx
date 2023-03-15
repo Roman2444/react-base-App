@@ -8,11 +8,12 @@ const Login = () => {
   const logIn = (e) => {
     e.preventDefault();
     setIsAuth(true);
+    localStorage.setItem("isAuth", "true");
   };
   return (
     <div>
       <h2>Страница авторизации</h2>
-      <form  onSubmit={(e) => logIn(e)} style={{ width: 300 }}>
+      <form onSubmit={(e) => logIn(e)} style={{ width: 300 }}>
         <MyInput placeholder="введите имя" type="text" />
         <MyInput placeholder="введите пароль" type="password" />
         <MyButton>Войти</MyButton>

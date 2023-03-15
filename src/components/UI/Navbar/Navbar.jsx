@@ -5,6 +5,10 @@ import MyButton from "../button/MyButton";
 
 const Navbar = () => {
   const { isAuth, setIsAuth } = React.useContext(AuthContext);
+  const logOut = () => {
+    setIsAuth(false);
+    localStorage.removeItem("isAuth");
+  };
 
   return (
     <div className="navbar">
@@ -12,8 +16,8 @@ const Navbar = () => {
         <Link to="/">Посты</Link>
         <Link to="/about">О проекте</Link>
       </div>
-      <MyButton onClick={() => setIsAuth(false)} style={{ marginLeft: "auto" }}>
-        {isAuth ? 'выйти' : "регистрация"}
+      <MyButton onClick={() => logOut()} style={{ marginLeft: "auto" }}>
+        {isAuth ? "выйти" : "регистрация"}
       </MyButton>
     </div>
   );
