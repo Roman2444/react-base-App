@@ -1,15 +1,22 @@
 import React from "react";
 import MyButton from "../components/UI/button/MyButton";
 import MyInput from "../components/UI/input/MyInput";
+import { AuthContext } from "../context";
 
 const Login = () => {
+  const { setIsAuth, isAuth } = React.useContext(AuthContext);
+  const logIn = (e) => {
+    e.preventDefault();
+    setIsAuth(true);
+    console.log(isAuth);
+  };
   return (
     <div>
       <h2>Страница авторизации</h2>
       <form style={{ width: 300 }}>
         <MyInput placeholder="введите имя" type="text" />
         <MyInput placeholder="введите пароль" type="password" />
-        <MyButton>Войти</MyButton>
+        <MyButton onClick={(e) => logIn(e)}>Войти</MyButton>
       </form>
     </div>
   );
