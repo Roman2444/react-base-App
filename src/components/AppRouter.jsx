@@ -16,6 +16,7 @@ const AppRouter = () => {
           exact={route.exact}
         />
       ))}
+      <Route path="/login" element={<Navigate to="/" replace />} />
       <Route path="/*" element={<Navigate to="/error" replace />} />
     </Routes>
   ) : (

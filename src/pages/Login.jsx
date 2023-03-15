@@ -8,15 +8,14 @@ const Login = () => {
   const logIn = (e) => {
     e.preventDefault();
     setIsAuth(true);
-    console.log(isAuth);
   };
   return (
     <div>
       <h2>Страница авторизации</h2>
-      <form style={{ width: 300 }}>
+      <form  onSubmit={(e) => logIn(e)} style={{ width: 300 }}>
         <MyInput placeholder="введите имя" type="text" />
         <MyInput placeholder="введите пароль" type="password" />
-        <MyButton onClick={(e) => logIn(e)}>Войти</MyButton>
+        <MyButton>Войти</MyButton>
       </form>
     </div>
   );
