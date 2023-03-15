@@ -7,10 +7,13 @@ import "./styles/App.css";
 
 function App() {
   const [isAuth, setIsAuth] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
+
   React.useEffect(() => {
     if (localStorage.getItem("isAuth")) {
       setIsAuth(true);
     }
+    setIsLoading(false);
   }, []);
 
   return (
@@ -18,6 +21,7 @@ function App() {
       value={{
         isAuth,
         setIsAuth,
+        isLoading
       }}
     >
       <BrowserRouter>
