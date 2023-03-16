@@ -34,6 +34,8 @@ function Posts() {
     fetchPosts();
   }, [page, limit]);
 
+  // бесконечная лента, м. задать доп условие, чтобы отключать
+  // и была обычная загрузка постранично с пагинацией
   useObserver(lastElement, page < totalPages, isLoading, () => {
     setPage(page + 1);
   });
