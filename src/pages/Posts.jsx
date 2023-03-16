@@ -10,6 +10,7 @@ import Loader from "../components/UI/Loader/Loader";
 import { useFetching } from "../hooks/useFetching";
 import { getPageCount } from "../utils/pages";
 import Pagination from "../components/UI/pagination/Pagination";
+import { useObserver } from "../hooks/useObserver";
 
 function Posts() {
   const [posts, setPosts] = React.useState([]);
@@ -20,8 +21,6 @@ function Posts() {
   const [page, setPage] = React.useState(2);
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
   const lastElement = React.useRef();
-  const observer = React.useRef();
-  console.log(lastElement);
 
   const [fetchPosts, isLoading, postError] = useFetching(async () => {
     const response = await PostService.getAll(limit, page);
@@ -34,18 +33,9 @@ function Posts() {
     fetchPosts();
   }, [page]);
 
-  React.useEffect(() => {
-    if(isLoading) return;
-    if (observer.current) observer.current.disconnect();
-    var callback = function (entries, observer) {
-      if (entries[0].isIntersecting && page < totalPages) {
-        console.log("div ****");
-        setPage(page + 1);
-      }
-    };
-    observer.current = new IntersectionObserver(callback);
-    observer.current.observe(lastElement.current);
-  }, [isLoading]);
+  useObserver(lastElement, page < totalPages, isLoading, () => {
+    setPage(page + 1);
+  });
 
   const addNewPost = (newPost) => {
     setPosts((prev) => [...prev, newPost]);
